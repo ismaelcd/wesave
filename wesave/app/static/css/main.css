@@ -1,0 +1,7 @@
+/* Archivo: backup_manager/app/static/css/main.css */
+/* Ruta: /app/static/css/main.css */
+/* Descripción: Estilos principales de la aplicación */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

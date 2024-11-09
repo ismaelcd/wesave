@@ -1,0 +1,39 @@
+# Archivo: backup_manager/docker-compose.yml
+# Ruta: /docker-compose.yml
+# Descripción: Configuración de servicios Docker para desarrollo
+
+version: "3.8"
+services:
+  db:
+    image: postgres:14
+    container_name: backup_manager_db
+    environment:
+      POSTGRES_DB: backup_manager
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: adminpassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - backup_network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: backup_manager_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    networks:
+      - backup_network
+
+volumes:
+  postgres_data:
+
+networks:
+  backup_network:
+    driver: bridge
